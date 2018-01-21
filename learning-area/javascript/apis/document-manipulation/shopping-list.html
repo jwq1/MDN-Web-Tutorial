@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta http-equiv="Cache-Control" content="no-cache">
     <title>Shopping list example</title>
     <style>
       li {
@@ -21,7 +22,7 @@
 
     <div>
       <label for="item">Enter a new item:</label>
-      <input type="text" name="item" id="item">
+      <input type="text" name="item" id="item" value="">
       <button>Add item</button>
     </div>
 
@@ -30,6 +31,34 @@
     </ul>
 
     <script>
+      var shoppingList = document.querySelector('ul');
+      var itemInput = document.querySelector('#item');
+      var addBtn = document.querySelector('button');
+      var addedItem;
+
+      addBtn.addEventListener('click', addNewItem);
+
+      function addNewItem() {
+        addedItem = itemInput.value;
+        itemInput.value = '';
+
+        var newItem = document.createElement('li');
+        var theSpan = document.createElement('span');
+        var buttonToRemove = document.createElement('button');
+
+        buttonToRemove.setAttribute('class', 'delete-btn');
+
+        newItem.appendChild(theSpan);
+        newItem.appendChild(buttonToRemove);
+
+        theSpan.textContent = addedItem;
+        buttonToRemove.textContent = 'Delete';
+
+        shoppingList.appendChild(newItem);
+
+      }
+
+    
 
     </script>
   </body>
