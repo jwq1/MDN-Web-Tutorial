@@ -28,6 +28,13 @@
         var linkPara = document.querySelector('p');
         linkPara.appendChild(text);
 
+        sect.addEventListener('click', moveElement)
+
+        function moveElement(event) {
+          event.stopPropagation();
+          sect.appendChild(linkPara);
+        }
+
         window.addEventListener('click', removeLinkPara, {
           once: true
         });
