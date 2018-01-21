@@ -28,17 +28,21 @@
         var linkPara = document.querySelector('p');
         linkPara.appendChild(text);
 
+        // Listen for clicks on the section element.
         sect.addEventListener('click', moveElement)
 
+        // Move the link paragraph when the section is clicked.
         function moveElement(event) {
           event.stopPropagation();
           sect.appendChild(linkPara);
         }
 
+        // Listen for clicks on the link paragraph only once.
         window.addEventListener('click', removeLinkPara, {
           once: true
         });
 
+        // Remove the link paragraph.
         function removeLinkPara() {
           linkPara.parentNode.removeChild(linkPara);
         }
