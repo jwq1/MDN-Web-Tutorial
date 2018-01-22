@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Shopping list example</title>
+    <style>
+      li {
+        margin-bottom: 10px;
+      }
+
+      li button {
+        font-size: 8px;
+        margin-left: 20px;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+
+    </div>
+
+    <script>
+
+    // TODO figure out how to make only the paragraph clicked on dissappear.
+      // Right now the entire body dissappears or nothing at all.
+
+      window.onload = function() {
+        var div = document.querySelector('div');
+
+        for(i = 0; i < 10; i++) {
+          var para = document.createElement('p');
+          para.setAttribute('id', 'para-' + i);
+          para.textContent = 'Lorem ipsum';
+          div.appendChild(para);
+        }
+      }
+
+      function hide(e){
+        e.target.style.visibility = "hidden";
+        console.log(e.target);
+        // When this function is used as an event handler: this === e.currentTarget
+      }
+
+      var ps = document.querySelectorAll('p');
+
+      for(var i = 0; i < ps.length; i++){
+        // console: print the clicked <p> element
+        ps[i].addEventListener('click', hide, true);
+        console.log('ps[' + i + ']');
+      }
+      // console: print <body>
+      document.addEventListener('click', hide, true);
+
+      // click around and make paragraphs disappear
+
+    </script>
+  </body>
+</html>
