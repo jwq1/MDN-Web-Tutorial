@@ -35,30 +35,53 @@
       var itemInput = document.querySelector('#item');
       var addBtn = document.querySelector('button');
       var addedItem;
+      var shoppingItems;
+      var listCounter = 0;
 
       addBtn.addEventListener('click', addNewItem);
 
       function addNewItem() {
+        // Get value of the list item to add.
         addedItem = itemInput.value;
+        // Clear the text field.
         itemInput.value = '';
 
+        // Create a list item structure.
         var newItem = document.createElement('li');
         var theSpan = document.createElement('span');
         var buttonToRemove = document.createElement('button');
 
-        buttonToRemove.setAttribute('class', 'delete-btn');
-
+        // Append the item content and delete button to the list item.
         newItem.appendChild(theSpan);
         newItem.appendChild(buttonToRemove);
 
+        // Populate the list item with content.
         theSpan.textContent = addedItem;
         buttonToRemove.textContent = 'Delete';
 
+        // Set the attributes of the delete button.
+        buttonToRemove.setAttribute('class', 'delete-btn');
+        buttonToRemove.setAttribute('id', 'item-' + listCounter);
+        // Increment the id number by 1.
+        listCounter++;
+
+        // Add all of this to the shopping list.
         shoppingList.appendChild(newItem);
+
+        // Listen for clicks on the delete button.
+        buttonToRemove.addEventListener('click', deleteItem)
 
       }
 
-    
+      // Delete the corresponding item.
+      function deleteItem(e) {
+
+        // Get the list item which was clicked
+        var clickedItem = e.target.parentNode;
+
+        // Remove the list item.
+        clickedItem.parentNode.removeChild(clickedItem);
+      }
 
     </script>
   </body>
