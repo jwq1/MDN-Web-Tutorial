@@ -1,22 +1,30 @@
 // create a variable to store the products 'database' in
 var products;
 
+// Replace the fetch promise with XHR.
+var url = 'products.json';
+
+var request = new XMLHttpRequest;
+
+request.open('GET', url);
+request.responseType = 'json';
+request.onload = function() {
+  if (request.status === 200) {
+    var products = request.response;
+    initialize(products);
+  } else {
+    console.logconsole.log('Network request for products.json failed with response ' + response.status + ': ' + response.statusText);
+  }
+}
+request.send();
+
 // use fetch to retrieve it, and report any errors that occur in the fetch operation
 // once the products have been successfully loaded and formatted as a JSON object
 // using response.json(), run the initialize() function
-fetch('products.json').then(function(response) {
-  if(response.ok) {
-    response.json().then(function(json) {
-      products = json;
-      initialize();
-    });
-  } else {
-    console.log('Network request for products.json failed with response ' + response.status + ': ' + response.statusText);
-  }
-});
+
 
 // sets up the app logic, declares required variables, contains all the other functions
-function initialize() {
+function initialize(products) {
   // grab the UI elements that we need to manipulate
   var category = document.querySelector('#category');
   var searchTerm = document.querySelector('#searchTerm');
